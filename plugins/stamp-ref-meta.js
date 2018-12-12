@@ -2,7 +2,6 @@
 
   $.fn.stampRefMeta = function(options) {
 
-    var apiSingleUri = options.apiSingleUri;
     var apiMultiUri  = options.apiMultiUri;
     var class_metas  = options.class_metas;
 
