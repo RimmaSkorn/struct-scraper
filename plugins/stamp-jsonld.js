@@ -1,7 +1,6 @@
 ﻿(function ($) {
     $.fn.stampRefJsonld = function (options) {
 
-        var apiSingleUri = options.apiSingleUri;
         var apiMultiUri = options.apiMultiUri;
         var import_schema = options.import_schema;
 
@@ -9,7 +8,6 @@
         var import_url_selector = '.jsonld-url';
 
         var pending_class = 'import-pending';
-        var done_class = 'rsrc-done';
         var fail_class = 'rsrc-fail';
 
         var getLang = function (elem) {
@@ -54,7 +52,7 @@
         }
 
         var AppendPropString = function(elem, key, value) {
-            if (Date.parse(value) && (!/[а-яА-ЯЁё]/.test(value)) && (!$.isNumeric(value))) {
+            if (Date.parse(value) && (!$.isNumeric(value)) && (!/[а-яА-ЯЁё]/.test(value)) ) {
                 var lang = getLang(elem);
                 value = formatedDate(value, NaN, lang);
             };
