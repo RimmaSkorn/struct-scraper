@@ -1,7 +1,6 @@
 ﻿(function ($) {
     $.fn.stampRefMicro = function (options) {
 
-        var apiSingleUri  = options.apiSingleUri;
         var apiMultiUri = options.apiMultiUri;
         var import_schema = options.import_schema;
 
@@ -9,32 +8,7 @@
         var import_url_selector = '.micro-url';
 
         var pending_class = 'import-pending';
-        var done_class = 'rsrc-done';
         var fail_class = 'rsrc-fail';
-
-        var getLang = function(elem) {
-
-            var elemLang = $(elem).closest("[lang]").attr("lang");
-            if (elemLang) {
-                return elemLang;
-            }
-
-            var navigatorLang = navigator.language;
-            if (!navigatorLang) {
-                navigatorLang = navigator.browserLanguage;
-            };
-            return navigatorLang;
-        }
-
-        var formatedDate = function(date, format, lang) {
-            var momentDate = new moment(date);
-            if (!momentDate.isValid())
-                return date;
-            if (format)
-                return momentDate.format(format);
-            momentDate.locale(lang);
-            return momentDate.format('L');
-        }
 
         var getRequests = function() {
 
