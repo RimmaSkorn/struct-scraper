@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <title>Microdata test</title>
+    <link rel="stylesheet" type="text/css" href="micro-org.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="http://195.209.147.157:81/Scripts/stamp-micro.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(document).stampRefMicro({
+                apiMultiUri: 'http://195.209.147.157:81/api/microdata/multi-uri',
+                import_schema: "Organization"
+            });
+        });
+    </script>
+</head>
+<body lang="ru">
+    
+    <ul>
+        <li><h1>Организации</h1></li>
+
+        <li class="import-micro">
+            <a class="micro-url" href="http://keldysh.ru/">ИПМ им.М.В.Келдыша РАН</a>
+        </li>
+        <li class="import-micro">
+            <a class="micro-url" href="https://www.adonis.perm.ru/company/">Страховая фирма «Адонис»</a>
+        </li>
+        <li class="import-micro">
+            <a class="micro-url" href="https://www.klasko.ru/">КЛАЗКО</a>
+        </li>
+        <li class="import-micro">
+            <a class="micro-url" href="http://www.izmailovo.ru/">Гостиницы Измайлово</a>
+        </li>
+        <li class="import-micro">
+            <a class="micro-url" href="https://maliandao-tea.ru/">Королевство чая Малиандао</a>
+        </li>
+        <li class="import-micro">
+            <a class="micro-url" href="https://incab.ru/">Завод Инкаб</a>
+        </li>
+        <li class="import-micro">
+            <a class="micro-url" href="https://www.newreg.ru/">АО &quot;Новый регистратор&quot;</a>
+        </li>
+        <li class="import-micro">
+            <a class="micro-url" href="https://materiamedica.ru/">НПФ Материа Медика</a>
+        </li>
+
+    </ul>
+
+
+</body>
+</html>

@@ -1,0 +1,91 @@
+﻿body {
+}
+a {
+    text-decoration:none;
+}
+a:hover {
+    text-decoration:underline;
+}
+li {
+    list-style-type:none;
+}
+
+.content {
+    margin:auto;
+    max-width: 800px;
+}
+
+td, [itemprop="price"] {
+    background-color:#F5F5F5; 
+    padding:10px;
+}
+[itemprop="price"] {
+    padding:15px;
+    font-weight:bold;
+}
+
+th {
+    background-color:black;
+    color: white;
+    padding:10px;
+}
+
+tr:nth-child(2n+1) td {
+    background-color: white;
+} 
+
+tr:nth-child(2n+1) [itemprop="price"] {
+    background-color: white;
+} 
+
+.import-micro {
+    font-family:Arial, sans-serif;  
+    font-size:small;
+    /*color:#222;  
+    margin-left:5em;
+    margin-right:5em;
+    margin-top:1em;
+    width:800px;*/
+} 
+
+.import-pending .micro-url::before {
+    /*background-image: url('https://minvei.no/data/c006bb24-b0ed-4ffc-afe5-57f84ecfc5c4');*/
+    background-image: url('http://195.209.147.157:81/Images/ajax-loader.gif');
+    background-size: 10px 10px;
+    display: inline-block;
+    width: 12px; 
+    height: 12px;
+    margin-right:4px;
+    content:"";
+} 
+.micro-url {
+    /*color:#006621;
+    margin-top:0.1em;
+    margin-bottom:0.1em;*/
+    white-space:nowrap;
+}
+
+[itemprop] {
+    display:none;
+}
+
+[itemprop="name"], [itemprop="offers"] {
+    display:table-cell;
+}
+
+[itemprop="offers"] + [itemprop="offers"] {
+    display:none;
+}
+
+[itemprop="offers"] > [itemprop="price"] {
+        display: block;
+    }
+
+[itemprop="name"] {
+    color:navy; 
+    /*font-size:medium;*/
+/*font-weight:bold;*/    
+    /*margin-top: 2px;
+    margin-bottom:3px;*/
+}
+
