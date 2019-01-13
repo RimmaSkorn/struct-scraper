@@ -5,3 +5,5 @@
 Currently, StructScraper supports:
 * Microdata,  JSON-LD and meta-tag-based markup  in HTML documents
 * Embedded and custom properties in Word and PDF documents
+
+The microdata parser grew out of the preliminary implementation of the [Chapleau.MicrodataParser]( https://archive.codeplex.com/?p=microdata) library, with additions and improvements made to resolve bugs and improve code maintainability.
