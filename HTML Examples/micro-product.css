@@ -50,7 +50,7 @@ tr:nth-child(2n+1) [itemprop="price"] {
 
 .import-pending .micro-url::before {
     /*background-image: url('https://minvei.no/data/c006bb24-b0ed-4ffc-afe5-57f84ecfc5c4');*/
-    background-image: url('http://195.209.147.157:81/Images/ajax-loader.gif');
+    background-image: url('https://struct-scraper.keldysh.ru/Images/ajax-loader.gif');
     background-size: 10px 10px;
     display: inline-block;
     width: 12px; 

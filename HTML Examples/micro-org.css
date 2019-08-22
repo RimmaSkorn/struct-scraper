@@ -9,27 +9,22 @@ li {
 }
 
 h1 {
-    color:#000077; 
-    /*color:navy; 
-    margin-top:1em;*/
-    margin-left:100px;
-    font-weight:normal;
-    /*font-family:Arial, sans-serif;*/  
+    color: #000077;
+    margin-left: 5%;
+    font-weight: normal;
 }
 
 .import-micro {
-    font-family:Arial, sans-serif;  
-    font-size:small;
-    color:#222;  
-    margin-left:5em;
-    margin-left:100px;
-    margin-right:5em;
-    margin-top:1em;
-    width:800px;
+    font-family: Arial, sans-serif;
+    font-size: small;
+    color: #222;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 1em;
+    width: 800px;
 } 
 .import-pending .micro-url::before {
-    /*background-image: url('https://minvei.no/data/c006bb24-b0ed-4ffc-afe5-57f84ecfc5c4');*/
-    background-image: url('http://195.209.147.157:81/Images/ajax-loader.gif');
+    background-image: url('https://struct-scraper.keldysh.ru/Images/ajax-loader.gif');
     background-size: 10px 10px;
     display: inline-block;
     width: 12px; 

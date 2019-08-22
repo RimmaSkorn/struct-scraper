@@ -11,16 +11,15 @@ li {
 }
 
 .rsrc {
-    font-family:Arial, sans-serif;  
-    color:#222;  
-    margin-left:5em;
-    margin-right:5em;
-    margin-top:1em;
-    width:800px;
+    font-family: Arial, sans-serif;
+    color: #222;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 1em;
+    width: 800px;
 } 
 .rsrc-pending .rsrc-ref::before {
-    /*background-image: url('https://minvei.no/data/c006bb24-b0ed-4ffc-afe5-57f84ecfc5c4');*/
-    background-image: url('http://alive.keldysh.ru/Images/ajax-loader.gif');
+    background-image: url('https://struct-scraper.keldysh.ru/Images/ajax-loader.gif');
     background-size: 10px 10px;
     display: inline-block;
     width: 12px; 
