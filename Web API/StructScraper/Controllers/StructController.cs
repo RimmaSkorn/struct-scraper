@@ -4,39 +4,39 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Threading.Tasks;
 
-using StructScraper.Models.Microdata;
-
+using StructScraper.Models.Struct;
 
 namespace StructScraper.Controllers
 {
-    public class MicrodataController : ApiController
+    public class StructController : ApiController
     {
         [HttpPost]
         [ActionName("single-uri")]
-        public async Task<IHttpActionResult> GetMicrodata(MicrodataRequest request)
+        public async Task<IHttpActionResult> GetStruct(StructRequest request)
         {
-            MicrodataResponse response = await request.GetResponse();
+            StructResponse response = await request.GetResponse();
 
-            if (response.Microdata == null)
+            if (response.Struct == null)
             {
                 HttpResponseMessage respMess = new HttpResponseMessage(response.StatusCode) { ReasonPhrase = response.ErrorMessage };
                 return ResponseMessage(respMess);
             }
-            return Ok(response.Microdata);
+            return Ok(response.Struct);
         }
 
         [HttpPost]
         [ActionName("multi-uri")]
-        public async Task<IEnumerable<MicrodataResponse>> GetMicrodata(IEnumerable<MicrodataRequest> requests)
+        public async Task<IEnumerable<StructResponse>> GetStruct(IEnumerable<StructRequest> requests)
         {
             if (requests == null)
             {
-                return new List<MicrodataResponse>();
+                return new List<StructResponse>();
             }
 
             var responses = await Task.WhenAll(requests.Select(async rq => await rq.GetResponse()));
             return responses;
         }
+
 
     }
 }

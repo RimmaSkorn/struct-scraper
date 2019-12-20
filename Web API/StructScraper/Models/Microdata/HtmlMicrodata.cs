@@ -35,12 +35,12 @@ namespace StructScraper.Models.Microdata
                         return new MicrodataResponse() { Url = uri.AbsoluteUri, StatusCode = response.StatusCode, Microdata = null, ErrorMessage = response.ReasonPhrase };
                     }
 
+                    var enc = response.Content.Headers.ContentType.CharSet;
                     string result = await content.ReadAsStringAsync();
                     if (!String.IsNullOrWhiteSpace(result))
                     {
                         var doc = new HtmlDocument();
 
-                        var enc = response.Content.Headers.ContentType.CharSet;
                         if (enc == null)
                         {
                             var ench = doc.DetectEncodingHtml(result);
@@ -48,7 +48,7 @@ namespace StructScraper.Models.Microdata
                             result = ench.GetString(rbytes);
                         }
 
-                        IList<MicroObject> microObjects = Parser.Parse(result, schemaType);
+                        IList<MicroObject> microObjects = Parser.Parse(result, schemaType, uri);
 
                         if (microObjects.Count > 0)
                         {

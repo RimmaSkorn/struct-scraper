@@ -1,0 +1,26 @@
+﻿.container-fluid {
+    max-width: 1420px;
+}
+
+.import-struct {
+    font-family: Arial, sans-serif;
+    font-size: small;
+    color: #222;
+    padding: 15px;
+    vertical-align: middle;
+} 
+
+.import-pending .struct-url::before {
+    background-image: url('https://struct-scraper.keldysh.ru//Images/ajax-loader.gif');
+    background-size: 10px 10px;
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin-right: 4px;
+    content: "";
+}
+ .struct-url {
+    color: #006621;
+}
+
+

@@ -36,7 +36,7 @@
             if (object.itemType)
                 newElem.attr("itemtype", object.itemType);
             $.each(object, function (key, value) {
-                if ((key != "itemType") && (key != "itemId") && (key != "name")) {
+                if ((key != "itemType") && (key != "itemId")) {
                     if (typeof value == 'string') {
                         AppendPropString(newElem, key, value);
                     } else if (Array.isArray(value)) {

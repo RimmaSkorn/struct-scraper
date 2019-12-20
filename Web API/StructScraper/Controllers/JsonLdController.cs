@@ -12,7 +12,7 @@ namespace StructScraper.Controllers
         {
             [HttpPost]
             [ActionName("single-uri")]
-            public async Task<IHttpActionResult> GetOrganization(JsonLdRequest request)
+            public async Task<IHttpActionResult> GetJsonLd(JsonLdRequest request)
             {
                 JsonLdResponse response = await request.GetResponse();
 

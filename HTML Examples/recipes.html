@@ -1,0 +1,221 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Soup recipes</title>
+    <link rel="stylesheet" type="text/css" href="recipes.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/spacelab/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-sZG5VVk41YqhJjYXgJFoRVd3d2AdDgy4oyIytQJMGx/Mizz1N+5bgKQBSCGfKQnP" crossorigin="anonymous">
+
+    <!--<link href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/flatly/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-T5jhQKMh96HMkXwqVMSjF3CmLcL1nT9//tCqu9By5XSdj7CwR0r+F3LTzUdfkkQf" crossorigin="anonymous">-->
+    <!--<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <script src="https://struct-scraper.keldysh.ru/Scripts/moment-with-locales.min.js"></script>
+    <script src="https://struct-scraper.keldysh.ru/Scripts/fill-struct.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(document).fillRefStruct({
+                apiMultiUri: 'https://struct-scraper.keldysh.ru/api/struct/multi-uri',
+                import_schema: "Recipe"
+            });
+        });
+    </script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+</head>
+
+<body lang="ru">
+    <div class="container-fluid">
+        <div class="page-header">
+            <h1>Soup recipes</h1>
+        </div>
+        <div class="row">
+
+            <div class="col-md-6 col-lg-4 card import-struct p-4">
+                <a href="https://www.allrecipes.com/recipe/231282/hearty-italian-meatball-soup/"><img class="card-img-top" itemprop="image" alt="Photo" data-unique="true"></a>
+                <h5 class="card-header"><a class="struct-url" href="https://www.allrecipes.com/recipe/231282/hearty-italian-meatball-soup/" itemprop="name">Hearty Italian Meatball Soup</a></h5>
+                <div class="card-body">
+                    <h5 class="card-title">Ingredients</h5>
+                    <ul class="list-unstyled">
+                        <li itemprop="recipeIngredient"></li>
+                        <li itemprop="ingredients"></li>
+                    </ul>
+                    <a href="https://www.allrecipes.com/recipe/231282/hearty-italian-meatball-soup/" class="card-link">Learn more...</a>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 card import-struct p-4">
+                <a href="https://www.tablespoon.com/recipes/loaded-slow-cooker-potato-soup/cec34bb7-f0d7-4896-ba8a-6af51a40e354"><img class="card-img-top" itemprop="image" alt="Photo" data-unique="true"></a>
+                <h5 class="card-header"><a class="struct-url" href="https://www.tablespoon.com/recipes/loaded-slow-cooker-potato-soup/cec34bb7-f0d7-4896-ba8a-6af51a40e354" itemprop="name" data-unique="true">Loaded Slow-Cooker Potato Soup</a></h5>
+                <div class="card-body">
+                    <h5 class="card-title">Ingredients</h5>
+                    <ul class="list-unstyled">
+                        <li itemprop="recipeIngredient"></li>
+                        <li itemprop="ingredients"></li>
+                    </ul>
+                    <a href="https://www.tablespoon.com/recipes/loaded-slow-cooker-potato-soup/cec34bb7-f0d7-4896-ba8a-6af51a40e354" class="card-link">Learn more...</a>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 card import-struct p-4">
+                <a href="https://www.epicurious.com/recipes/food/views/beef-bone-broth-51260700"><img class="card-img-top" itemprop="image" alt="Photo"></a>
+                <h5 class="card-header"><a class="struct-url" href="https://www.epicurious.com/recipes/food/views/beef-bone-broth-51260700" itemprop="name">Beef Bone Broth</a></h5>
+                <div class="card-body">
+                    <h5 class="card-title">Ingredients</h5>
+                    <ul class="list-unstyled">
+                        <li itemprop="recipeIngredient"></li>
+                        <li itemprop="ingredients"></li>
+                    </ul>
+                    <a href="https://www.epicurious.com/recipes/food/views/beef-bone-broth-51260700" class="card-link">Learn more...</a>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4 card import-struct p-4">
+                <a href="https://www.food.com/recipe/old-fashioned-vegetable-beef-soup-58901"><img class="card-img-top" itemprop="image" alt="Photo" data-unique="true"></a>
+                <h5 class="card-header"><a class="struct-url" href="https://www.food.com/recipe/old-fashioned-vegetable-beef-soup-58901" itemprop="name">Old-Fashioned Vegetable Beef Soup</a></h5>
+                <div class="card-body">
+                    <h5 class="card-title">Ingredients</h5>
+                    <ul class="list-unstyled">
+                        <li itemprop="recipeIngredient"></li>
+                        <li itemprop="ingredients"></li>
+                    </ul>
+                    <a href="https://www.food.com/recipe/old-fashioned-vegetable-beef-soup-58901" class="card-link">Learn more...</a>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 card import-struct p-4">
+                <a href="https://www.onceuponachef.com/recipes/potato-leek-soup.html"><img class="card-img-top" itemprop="image" alt="Photo" data-unique="true"></a>
+                <h5 class="card-header"><a class="struct-url" href="https://www.onceuponachef.com/recipes/potato-leek-soup.html" itemprop="name">Potato Leek Soup</a></h5>
+                <div class="card-body">
+                    <h5 class="card-title">Ingredients</h5>
+                    <ul class="list-unstyled">
+                        <li itemprop="recipeIngredient"></li>
+                        <li itemprop="ingredients"></li>
+                    </ul>
+                    <a href="https://www.onceuponachef.com/recipes/potato-leek-soup.html" class="card-link">Learn more...</a>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 card import-struct p-4">
+                <a href="https://www.inspiredtaste.net/37475/homemade-chicken-noodle-soup-recipe/"><img class="card-img-top" itemprop="image" alt="Photo" data-unique="true"></a>
+                <h5 class="card-header"><a class="struct-url" href="https://www.inspiredtaste.net/37475/homemade-chicken-noodle-soup-recipe/" itemprop="name" data-unique="true">Ultra-Satisfying Homemade Chicken Noodle Soup</a></h5>
+                <div class="card-body">
+                    <h5 class="card-title">Ingredients</h5>
+                    <ul class="list-unstyled">
+                        <li itemprop="recipeIngredient"></li>
+                        <li itemprop="ingredients"></li>
+                    </ul>
+                    <a href="https://www.inspiredtaste.net/37475/homemade-chicken-noodle-soup-recipe/" class="card-link">Learn more...</a>
+                </div>
+            </div>
+
+
+            <div class="col-md-6 col-lg-4 card import-struct p-4">
+                <a href="https://homemadehooplah.com/weight-loss-wonder-soup/"><img class="card-img-top" itemprop="image" alt="Photo" data-unique="true"></a>
+                <h5 class="card-header"><a class="struct-url" href="https://homemadehooplah.com/weight-loss-wonder-soup/" itemprop="name">Weight Loss Wonder Soup</a></h5>
+                <div class="card-body">
+                    <h5 class="card-title">Ingredients</h5>
+                    <ul class="list-unstyled">
+                        <li itemprop="recipeIngredient"></li>
+                        <li itemprop="ingredients"></li>
+                    </ul>
+                    <a href="https://homemadehooplah.com/weight-loss-wonder-soup/" class="card-link">Learn more...</a>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 card import-struct p-4">
+                <a href="https://www.loveandlemons.com/carrot-coconut-gazpacho-with-lemongrass/"><img class="card-img-top" itemprop="image" alt="Photo" data-unique="true"></a>
+                <h5 class="card-header"><a class="struct-url" href="https://www.loveandlemons.com/carrot-coconut-gazpacho-with-lemongrass/" itemprop="name">Carrot Coconut Gazpacho with Lemongrass</a></h5>
+                <div class="card-body">
+                    <h5 class="card-title">Ingredients</h5>
+                    <ul class="list-unstyled">
+                        <li itemprop="recipeIngredient"></li>
+                        <li itemprop="ingredients"></li>
+                    </ul>
+                    <a href="https://www.loveandlemons.com/carrot-coconut-gazpacho-with-lemongrass/" class="card-link">Learn more...</a>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 card import-struct p-4">
+                <a href="https://www.skinnytaste.com/crock-pot-creamy-tomato-soup/"><img class="card-img-top" itemprop="image" alt="Photo" data-unique="true"></a>
+                <h5 class="card-header"><a class="struct-url" href="https://www.skinnytaste.com/crock-pot-creamy-tomato-soup/" itemprop="name">Crock pot Creamy Tomato Soup</a></h5>
+                <div class="card-body">
+                    <h5 class="card-title">Ingredients</h5>
+                    <ul class="list-unstyled">
+                        <li itemprop="recipeIngredient"></li>
+                        <li itemprop="ingredients"></li>
+                    </ul>
+                    <a href="https://www.skinnytaste.com/crock-pot-creamy-tomato-soup/" class="card-link">Learn more...</a>
+                </div>
+            </div>
+
+
+            <div class="col-md-6 col-lg-4 card import-struct p-4">
+                <a href="https://www.deliaonline.com/recipes/collections/root-vegetables/leek-onion-and-potato-soup"><img class="card-img-top" itemprop="image" alt="Photo" data-unique="true"></a>
+                <h5 class="card-header"><a class="struct-url" href="https://www.deliaonline.com/recipes/collections/root-vegetables/leek-onion-and-potato-soup" itemprop="name">Leek, Onion and Potato Soup</a></h5>
+                <div class="card-body">
+                    <h5 class="card-title">Ingredients</h5>
+                    <ul class="list-unstyled">
+                        <li itemprop="recipeIngredient"></li>
+                        <li itemprop="ingredients"></li>
+                    </ul>
+                    <a href="https://www.deliaonline.com/recipes/collections/root-vegetables/leek-onion-and-potato-soup" class="card-link">Learn more...</a>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 card import-struct p-4">
+                <a href="https://www.simplyrecipes.com/recipes/moms_turkey_soup/"><img class="card-img-top" itemprop="image" alt="Photo" data-unique="true"></a>
+                <h5 class="card-header"><a class="struct-url" href="https://www.simplyrecipes.com/recipes/moms_turkey_soup/" itemprop="name" data-unique="true">Mom’s Turkey Soup</a></h5>
+                <div class="card-body">
+                    <h5 class="card-title">Ingredients</h5>
+                    <ul class="list-unstyled">
+                        <li itemprop="recipeIngredient"></li>
+                        <li itemprop="ingredients"></li>
+                    </ul>
+                    <a href="https://www.simplyrecipes.com/recipes/moms_turkey_soup/" class="card-link">Learn more...</a>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4 card import-struct p-4">
+                <a href="https://thecozyapron.com/simple-lemony-chicken-spring-veggie-soup-a-little-sunshine-in-my-spoon/"><img class="card-img-top" itemprop="image" alt="Photo" data-unique="true"></a>
+                <h5 class="card-header"><a class="struct-url" href="https://thecozyapron.com/simple-lemony-chicken-spring-veggie-soup-a-little-sunshine-in-my-spoon/" itemprop="name" data-unique="true">Chicken Soup with Spring Veggies</a></h5>
+                <div class="card-body">
+                    <h5 class="card-title">Ingredients</h5>
+                    <ul class="list-unstyled">
+                        <li itemprop="recipeIngredient"></li>
+                        <li itemprop="ingredients"></li>
+                    </ul>
+                    <a href="https://thecozyapron.com/simple-lemony-chicken-spring-veggie-soup-a-little-sunshine-in-my-spoon/" class="card-link">Learn more...</a>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 card import-struct p-4">
+                <a href="https://damndelicious.net/2013/12/18/broccoli-cheese-soup/"><img class="card-img-top" itemprop="image" alt="Photo" data-unique="true"></a>
+                <h5 class="card-header"><a class="struct-url" href="https://damndelicious.net/2013/12/18/broccoli-cheese-soup/" itemprop="name" data-unique="true">Broccoli Cheese Soup</a></h5>
+                <div class="card-body">
+                    <h5 class="card-title">Ingredients</h5>
+                    <ul class="list-unstyled">
+                        <li itemprop="recipeIngredient"></li>
+                        <li itemprop="ingredients"></li>
+                    </ul>
+                    <a href="https://damndelicious.net/2013/12/18/broccoli-cheese-soup/" class="card-link">Learn more...</a>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 card import-struct p-4">
+                <a href="https://www.theslowroasteditalian.com/2014/09/hearty-beef-soup-recipe.html"><img class="card-img-top" itemprop="image" alt="Photo" data-unique="true"></a>
+                <h5 class="card-header"><a class="struct-url" href="https://www.theslowroasteditalian.com/2014/09/hearty-beef-soup-recipe.html" itemprop="name" data-unique="true">Best Ever Hearty Beef Soup</a></h5>
+                <div class="card-body">
+                    <h5 class="card-title">Ingredients</h5>
+                    <ul class="list-unstyled">
+                        <li itemprop="recipeIngredient"></li>
+                        <li itemprop="ingredients"></li>
+                    </ul>
+                    <a href="https://www.theslowroasteditalian.com/2014/09/hearty-beef-soup-recipe.html" class="card-link">Learn more...</a>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+</body>
+</html>

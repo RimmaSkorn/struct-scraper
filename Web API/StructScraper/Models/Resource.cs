@@ -6,6 +6,7 @@ using System.Net;
 using StructScraper.Models.Metadata;
 using StructScraper.Models.Microdata;
 using StructScraper.Models.JsonLd;
+using StructScraper.Models.Struct;
 
 
 namespace StructScraper.Models
@@ -77,6 +78,21 @@ namespace StructScraper.Models
             catch (Exception e)
             {
                 return new JsonLdResponse() { Url = Url, StatusCode = HttpStatusCode.BadRequest, JsonLd = null, ErrorMessage = e.Message };
+            }
+        }
+
+        public async Task<StructResponse> GetStruct(string schemaType)
+        {
+            try
+            {
+                Uri uri = new UriBuilder(Url).Uri;
+
+                HtmlStruct structure = new HtmlStruct(uri, schemaType);
+                return await structure.Get();
+            }
+            catch (Exception e)
+            {
+                return new StructResponse() { Url = Url, StatusCode = HttpStatusCode.BadRequest, Struct = null, ErrorMessage = e.Message };
             }
         }
 

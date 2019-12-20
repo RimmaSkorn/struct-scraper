@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 using HtmlAgilityPack;
 using Newtonsoft.Json.Linq;
@@ -18,28 +19,31 @@ namespace JsonLdParser
             HtmlDocument doc = new HtmlDocument();
             doc.LoadHtml(html);
 
-            IList<HtmlNode> scriptNodes = doc.DocumentNode.SelectNodes(xpathString);
-
             IList<JObject> objects = new List<JObject>();
 
-            foreach (HtmlNode snode in scriptNodes)
+            IList<HtmlNode> scriptNodes = doc.DocumentNode.SelectNodes(xpathString);
+            if (scriptNodes != null)
             {
-                string script = snode.InnerText.Trim();
-                if (script.StartsWith(bracketString))
+                foreach (HtmlNode snode in scriptNodes)
                 {
-                    JArray arr = JArray.Parse(script);
-                    foreach (JObject obj in arr)
+                    string script = snode.InnerText.Trim();
+                    if (script.StartsWith(bracketString))
                     {
-                        if (ObjIsOfType(obj,schemaType))
+                        JArray arr = JArray.Parse(script);
+                        foreach (JObject obj in arr)
+                        {
+                            if (ObjIsOfType(obj, schemaType))
+                                objects.Add(obj);
+                        };
+                    }
+                    else
+                    {
+                        JObject obj = JObject.Parse(script);
+                        if (ObjIsOfType(obj, schemaType))
                             objects.Add(obj);
-                    };
+                    }
                 }
-                else
-                {
-                    JObject obj = JObject.Parse(script);
-                    if (ObjIsOfType(obj, schemaType))
-                        objects.Add(obj);
-                }
+
             }
 
             return objects;
@@ -53,7 +57,8 @@ namespace JsonLdParser
             if (obj == null)
                 return false;
 
-            return (obj["@context"] != null) && (obj["@type"] != null) && ((string)(obj["@type"]) == schemaType);
+            string[] types = schemaType.Split(',').Select(s => s.Trim()).ToArray();
+            return (obj["@context"] != null) && (obj["@type"] != null) && (types.Contains((string)(obj["@type"])));
         }
 
     }

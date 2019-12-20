@@ -263,22 +263,28 @@
     <Content Include="Scripts\moment.min.js" />
     <Content Include="Scripts\set-alive-data.js" />
     <Content Include="Scripts\stamp-jsonld.js" />
+    <Content Include="Scripts\fill-struct.js" />
+    <Content Include="Scripts\stamp-struct.js" />
     <Content Include="Scripts\stamp-micro.js" />
     <Content Include="Scripts\stamp-ref-meta.0.js" />
     <Content Include="Scripts\stamp-ref-meta.js" />
-    <Content Include="Test_Pages\index.html" />
+    <Content Include="Test_Pages\articles.css" />
+    <Content Include="Test_Pages\articles.html" />
     <Content Include="Test_Pages\jsonld-article.css" />
     <Content Include="Test_Pages\jsonld-article.html" />
     <Content Include="Test_Pages\jsonld-org.css" />
+    <Content Include="Test_Pages\recipes.css" />
+    <Content Include="Test_Pages\orgs.css" />
     <Content Include="Test_Pages\micro-org.css" />
-    <Content Include="Test_Pages\micro-product.css" />
+    <Content Include="Test_Pages\recipes.html" />
     <Content Include="Test_Pages\rsrc.css" />
-    <Content Include="Test_Pages\test-doc.html" />
+    <Content Include="Test_Pages\orgs.html" />
     <Content Include="Test_Pages\test-org.html" />
-    <Content Include="Test_Pages\test-org1.html" />
-    <Content Include="Test_Pages\test-product.html" />
+    <Content Include="Test_Pages\product.html" />
+    <Content Include="Test_Pages\product.css" />
     <Content Include="Test_Pages\test-meta.html" />
-    <Content Include="Test_Pages\test_alive.html" />
+    <Content Include="Test_Pages\test-product.css" />
+    <Content Include="Test_Pages\test-product.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -288,6 +294,7 @@
     <Compile Include="Controllers\JsonLdController.cs" />
     <Compile Include="Controllers\MetadataController.cs" />
     <Compile Include="Controllers\MicrodataController.cs" />
+    <Compile Include="Controllers\StructController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -306,6 +313,9 @@
     <Compile Include="Models\Microdata\MicrodataResponse.cs" />
     <Compile Include="Models\Resource.cs" />
     <Compile Include="Models\Response.cs" />
+    <Compile Include="Models\Struct\HtmlStruct.cs" />
+    <Compile Include="Models\Struct\StructRequest.cs" />
+    <Compile Include="Models\Struct\StructResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

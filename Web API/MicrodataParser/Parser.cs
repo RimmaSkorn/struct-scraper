@@ -19,8 +19,8 @@ namespace MicrodataParser
         private const string styleString = "style";
 
         private const string metaString = "meta";
-        private const string mediaString = "audio,embed,iframe,img,source,track,video";
-        private const string linksString = "a,area,link";
+        private const string mediaString = "audio,embed,iframe,img,source,track,video,";
+        private const string linksString = "a,area,link,";
         private const string objectString = "object";
         private const string timeString = "time";
 
@@ -31,7 +31,7 @@ namespace MicrodataParser
         private const string valueString = "value";
         private const string datetimeString = "datetime";
 
-        public static IList<MicroObject> Parse(string html, string schemaType)
+        public static IList<MicroObject> Parse(string html, string schemaType, Uri uri)
         {
             HtmlDocument doc = new HtmlDocument();
             doc.LoadHtml(html);
@@ -50,7 +50,7 @@ namespace MicrodataParser
             List<MicroObject> mos = new List<MicroObject>();
 
             foreach (var microNode in topLevelMicroNodes)
-                mos.Add(GetMicroObject(doc, microNode));
+                mos.Add(GetMicroObject(doc, microNode, uri));
 
             return mos;
         }
@@ -60,26 +60,21 @@ namespace MicrodataParser
             if (String.IsNullOrEmpty(schemaType))
                 return true;
 
-            if (!node.Attributes.Contains(itemtypeString))
+            if ((node.Attributes == null) || (!node.Attributes.Contains(itemtypeString)))
                 return false;
 
-            IList<string> types = node.Attributes[itemtypeString].Value.Split(' ').ToList();
+            IList<string> schemaTypes = schemaType.Split(',').Select(s => s.Trim()).ToList();
+            IList<string> types = node.Attributes[itemtypeString].Value.Split(' ').Select(s => s.Trim()).ToList();
 
-            bool result = false;
-            foreach (string t in types)
-            {
-                string type = t.Trim();
-                if (type.EndsWith(schemaString + schemaType, StringComparison.OrdinalIgnoreCase))
-                {
-                    result = true;
-                    break;
-                }
-            }
+            var intersect = from t in types
+                            from st in schemaTypes
+                            where (t.EndsWith(schemaString + st, StringComparison.OrdinalIgnoreCase))
+                            select t;
 
-            return result;
+            return intersect.Any();
         }
 
-        private static MicroObject GetMicroObject(HtmlDocument doc, HtmlNode microNode)
+        private static MicroObject GetMicroObject(HtmlDocument doc, HtmlNode microNode, Uri uri)
         {
             MicroObject mo = new MicroObject();
 
@@ -89,12 +84,12 @@ namespace MicrodataParser
             if (microNode.Attributes.Contains(itemidString))
                 mo.ID = microNode.Attributes[itemidString].Value;
 
-            mo.Properties = GetProperties(doc, GetPropNodes(doc, microNode));
+            mo.Properties = GetProperties(doc, GetPropNodes(doc, microNode), uri);
 
             return mo;
         }
 
-        private static IList<MicroProperty> GetProperties(HtmlDocument doc, IList<HtmlNode> propNodes)
+        private static IList<MicroProperty> GetProperties(HtmlDocument doc, IList<HtmlNode> propNodes, Uri uri)
         {
             IList<MicroProperty> properties = new List<MicroProperty>();
 
@@ -109,14 +104,18 @@ namespace MicrodataParser
 
                 if (propNode.Attributes.Contains(itemscopeString))
                 {
-                    prop.Value = new MicroObjectValue(GetMicroObject(doc, propNode));
+                    prop.Value = new MicroObjectValue(GetMicroObject(doc, propNode, uri));
                 }
                 else if ((propNodeName == metaString) && (propNode.Attributes[contentString] != null))
                     prop.Value = new MicroStringValue(propNode.Attributes[contentString].Value);
                 else if ((mediaString.Contains(propNodeName + ",")) && (propNode.Attributes[srcString] != null))
-                    prop.Value = new MicroStringValue(propNode.Attributes[srcString].Value);
+                {
+                    prop.Value = new MicroStringValue(ToAbsolute(uri, propNode.Attributes[srcString].Value));
+                }
                 else if ((linksString.Contains(propNodeName + ",")) && (propNode.Attributes[hrefString] != null))
-                    prop.Value = new MicroStringValue(propNode.Attributes[hrefString].Value);
+                {
+                    prop.Value = new MicroStringValue(ToAbsolute(uri, propNode.Attributes[hrefString].Value));
+                }
                 else if ((propNodeName == objectString) && (propNode.Attributes[dataString] != null))
                     prop.Value = new MicroStringValue(propNode.Attributes[dataString].Value);
                 else if ((propNodeName == dataString) && (propNode.Attributes[valueString] != null))
@@ -176,6 +175,13 @@ namespace MicrodataParser
             }
 
             return results;
+        }
+
+        private static string ToAbsolute(Uri baseUri, string href)
+        {
+            Uri absUri = new Uri(baseUri, href);
+            return absUri.ToString();
+
         }
 
     }

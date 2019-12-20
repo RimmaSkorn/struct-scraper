@@ -2,7 +2,7 @@
 
 namespace StructScraper.Models
 {
-    public class Response
+    public abstract class Response
     {
         public string Url { get; set; }
         public HttpStatusCode StatusCode { get; set; }
