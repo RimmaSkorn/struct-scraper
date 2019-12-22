@@ -46,5 +46,7 @@ To incorporate semantic data from external resources into your HTML page while t
 …
 ```
 
-Use `.import-struct` class for external data container and `.struct-url` class for hyperlink to external resource. Use `[itemprop]` attribute for [Schema.org]( http://schema.org/) property to be included. jQuery plugin `fillRefStruct` embedded in `fill-struct.js` file performs the job of filling external data.
+Use `.import-struct` class for external data container and `.struct-url` class for hyperlink to external resource. Use `[itemprop]` attribute for [Schema.org]( http://schema.org/) property to be included. 
+
+jQuery plugin `fillRefStruct` embedded in `fill-struct.js` file performs the job of filling external data. Parameter `apiMultiUri` contains the address of REST API request, and parameter `import_schema` includes the list of Schema.org types data should extract from.
 
