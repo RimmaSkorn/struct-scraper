@@ -1,0 +1,97 @@
+﻿a {
+    text-decoration:none;
+}
+a:hover {
+    text-decoration:underline;
+}
+
+h1 {
+    color: #000077;
+    margin-left: 5%;
+    font-weight: normal;
+    font-family: Verdana, sans-serif;
+}
+
+ul > li {
+    list-style-type: none;
+}
+
+.import-pending.import-struct {
+    list-style-type: none;
+}
+
+
+.import-struct{
+    font-family: Arial, sans-serif;
+    font-size: small;
+    color: #222;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 1em;
+    width: 800px;
+}
+
+
+.struct-url {
+    color: #006621;
+    margin-top: 0.1em;
+    margin-bottom: 0.1em;
+    white-space: nowrap;
+    margin-left: 0;
+}
+
+.import-pending .struct-url::before {
+    background-image: url('https://struct-scraper.keldysh.ru/Images/ajax-loader.gif');
+    background-size: 10px 10px;
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin-right: 4px;
+    content: "";
+}
+
+
+[itemprop="name"], [itemprop="headline"] {
+    display: inline;
+    font-family: Verdana, sans-serif;
+}
+
+[itemtype$="Article"] > [itemprop="name"] {
+    display: block;
+    color: navy;
+    font-size: medium;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    white-space: normal;
+}
+
+[itemtype$="Article"] > [itemprop="headline"] {
+    display: block;
+    color: navy;
+    font-size: medium;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    white-space: normal;
+}
+ 
+[itemprop="author"] > [itemprop="name"] {
+    font-style: italic;
+}
+
+[itemprop="author"] + [itemprop="author"]::before {
+    content: ",   ";
+    white-space: pre-wrap;
+ } 
+
+[itemprop="datePublished"] {
+    display:block;
+    font-style: italic;
+    margin-top:5px;
+}
+
+    [itemprop="datePublished"]:not(:empty)::before {
+        content: "Published: ";
+        white-space: pre-wrap;
+        font-weight: bold;
+    } 
+
