@@ -67,7 +67,7 @@
                 newElem.attr("itemtype", context + '/' + object["@type"]);
 
             $.each(object, function (key, value) {
-                if ((key != "itemType") && (key != "@type") && (key != "itemId")) {
+                if ((key != "itemType") && (key != "@type") && (key != "itemId") && (key != "@id")) {
                     if (typeof value == 'string') {
                         AppendPropString(newElem, key, value);
                     } else if (Array.isArray(value)) {
@@ -102,7 +102,7 @@
                     $(import_elem).attr("itemtype", context + '/' + struct["@type"]);
 
             $.each(struct, function (key, value) {
-                if ((key != "itemType") && (key != "@context") && (key != "@type") && (key != "itemId") && (key != "name") ) {
+                if ((key != "itemType") && (key != "@context") && (key != "@type") && (key != "itemId") && (key != "@id") && (key != "name") ) {
                     if (typeof value == 'string') {
                         AppendPropString(import_elem, key, value);
                     } else if (Array.isArray(value)) {
