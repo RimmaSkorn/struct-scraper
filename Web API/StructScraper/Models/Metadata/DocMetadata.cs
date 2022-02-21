@@ -7,19 +7,22 @@ using System.Net;
 using System.Configuration;
 using System.IO;
 
+using System.Net.Http;
+
 using DSOFile;
 
 namespace StructScraper.Models.Metadata
 {
     public class DocMetadata: ResourceMetadata
     {
-        public DocMetadata(Uri uri, IEnumerable<string> metaNames) : base(uri, metaNames) { }
+        public DocMetadata(Resource resource, IEnumerable<string> metaNames) : base(resource, metaNames) { }
 
-        public override async Task<MetadataResponse> Get()
+        public override async Task<MetadataResponse> Get(HttpContent content)
         {
             try
             {
                 IDictionary<string, string> metadata = new Dictionary<string, string>();
+
                 string fileName = tmpDir + @"\" + Guid.NewGuid() + ".doc";
                 if (!Directory.Exists(tmpDir))
                 {
@@ -27,11 +30,8 @@ namespace StructScraper.Models.Metadata
                 }
 
 
-                using (WebClient client = new WebClient())
-                {
-                    client.DownloadFile(uri, fileName);
-                }
-
+                using (var fs = new FileStream(fileName, FileMode.CreateNew))
+                    await content.CopyToAsync(fs);
 
                 OleDocumentProperties odp = new OleDocumentProperties();
                 odp.Open(fileName, true);
@@ -105,7 +105,8 @@ namespace StructScraper.Models.Metadata
 
                 foreach (CustomProperty p in odp.CustomProperties)
                 {
-                    if (metaNames.Contains(p.Name,StringComparer.OrdinalIgnoreCase)) {
+                    if (metaNames.Contains(p.Name, StringComparer.OrdinalIgnoreCase))
+                    {
                         dynamic value = p.get_Value();
                         if (value is DateTime)
                             metadata[p.Name] = ((DateTime)value).ToString(ISO_DATE_FORMAT);
@@ -114,17 +115,17 @@ namespace StructScraper.Models.Metadata
                     }
                 }
 
-                return new MetadataResponse() { Url = uri.AbsoluteUri, StatusCode = HttpStatusCode.OK, Metadata = metadata, ErrorMessage = null };
+                return new MetadataResponse() { Url = resource.Url, StatusCode = HttpStatusCode.OK, Metadata = metadata, ErrorMessage = null };
             }
             catch (Exception e)
             {
-                return new MetadataResponse() { Url = uri.AbsoluteUri, StatusCode = HttpStatusCode.BadRequest, Metadata = null, ErrorMessage = e.Message };
+                return new MetadataResponse() { Url = resource.Url, StatusCode = HttpStatusCode.BadRequest, Metadata = null, ErrorMessage = e.Message };
             }
 
         }
 
         private const string ISO_DATE_FORMAT = "yyyy-MM-dd";
-        static private string tmpDir = ConfigurationManager.AppSettings["TmpDir"];
+        private static readonly string tmpDir = ConfigurationManager.AppSettings["TmpDir"];
 
     }
 }

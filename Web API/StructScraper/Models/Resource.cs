@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Net;
+using System.Net.Http;
 
 using StructScraper.Models.Metadata;
 using StructScraper.Models.Microdata;
@@ -11,7 +12,7 @@ using StructScraper.Models.Struct;
 
 namespace StructScraper.Models
 {
-    public enum ResourceType { Html, Pdf, Docx, Doc }
+    public enum ResourceType { Html, Pdf, Docx, Doc, Unsupported }
 
     public class Resource
     {
@@ -21,27 +22,7 @@ namespace StructScraper.Models
         {
             try
             {
-                Uri uri = new UriBuilder(Url).Uri;
-
-                ResourceMetadata metadata;
-                switch (resourceType)
-                {
-                    case ResourceType.Html:
-                        metadata = new HtmlMetadata(uri, metaNames);
-                        break;
-                    case ResourceType.Pdf:
-                        metadata = new PdfMetadata(uri, metaNames);
-                        break;
-                    case ResourceType.Docx:
-                        metadata = new DocxMetadata(uri, metaNames);
-                        break;
-                    case ResourceType.Doc:
-                        metadata = new DocMetadata(uri, metaNames);
-                        break;
-                    default:
-                        metadata = new HtmlMetadata(uri, metaNames);
-                        break;
-                }
+                ResourceMetadata metadata = new ResourceMetadata(this, metaNames);
                 return await metadata.Get();
             }
             catch (Exception e)
@@ -55,9 +36,7 @@ namespace StructScraper.Models
         {
             try
             {
-                Uri uri = new UriBuilder(Url).Uri;
-
-                HtmlMicrodata microdata = new HtmlMicrodata(uri,schemaType);
+                HtmlMicrodata microdata = new HtmlMicrodata(this, schemaType);
                 return await microdata.Get();
             }
             catch (Exception e)
@@ -70,9 +49,8 @@ namespace StructScraper.Models
         {
             try
             {
-                Uri uri = new UriBuilder(Url).Uri;
 
-                HtmlJsonLd jsonld = new HtmlJsonLd(uri, schemaType);
+                HtmlJsonLd jsonld = new HtmlJsonLd(this, schemaType);
                 return await jsonld.Get();
             }
             catch (Exception e)
@@ -85,9 +63,7 @@ namespace StructScraper.Models
         {
             try
             {
-                Uri uri = new UriBuilder(Url).Uri;
-
-                HtmlStruct structure = new HtmlStruct(uri, schemaType);
+                HtmlStruct structure = new HtmlStruct(this, schemaType);
                 return await structure.Get();
             }
             catch (Exception e)
@@ -96,30 +72,44 @@ namespace StructScraper.Models
             }
         }
 
-        private ResourceType resourceType
+        private static ResourceType GetType(string contentType)
         {
-            get
+            if (contentType.Equals("application/pdf", StringComparison.OrdinalIgnoreCase))
             {
-                if (Url.EndsWith(".pdf", true, new System.Globalization.CultureInfo("en-US")))
-                {
-                    return ResourceType.Pdf;
-                }
-                else if (Url.EndsWith(".docx", true, new System.Globalization.CultureInfo("en-US")))
-                {
-                    return ResourceType.Docx;
-                }
-                else if (Url.EndsWith(".doc", true, new System.Globalization.CultureInfo("en-US")))
-                {
-                    return ResourceType.Doc;
-                }
-                else
-                {
-                    return ResourceType.Html;
-                }
-
+                return ResourceType.Pdf;
+            }
+            else if (contentType.Equals("application/vnd.openxmlformats-officedocument.wordprocessingml.document", StringComparison.OrdinalIgnoreCase))
+            {
+                return ResourceType.Docx;
+            }
+            else if (contentType.Equals("application/msword", StringComparison.OrdinalIgnoreCase))
+            {
+                return ResourceType.Doc;
+            }
+            else if (contentType.Equals("text/html", StringComparison.OrdinalIgnoreCase))
+            {
+                return ResourceType.Html;
+            }
+            else
+            {
+                return ResourceType.Unsupported;
             }
         }
+
+        public static ResourceType GetType(HttpContent content)
+        {
+            return GetType(content.Headers.ContentType.MediaType);
+        }
+
+        public async Task<HttpResponseMessage> GetResponse()
+        {
+            Uri uri = new UriBuilder(Url).Uri;
+            using (HttpClient client = new HttpClient())
+            {
+                client.DefaultRequestHeaders.Add("User-Agent", "StructScraper");
+                return await client.GetAsync(uri);
+            }
+        }
+
     }
-
-
 }

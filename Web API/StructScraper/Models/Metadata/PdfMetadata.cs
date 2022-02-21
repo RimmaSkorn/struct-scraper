@@ -11,51 +11,39 @@ using iText.Kernel.Pdf;
 
 namespace StructScraper.Models.Metadata
 {
-    public class PdfMetadata: ResourceMetadata
+    public class PdfMetadata : ResourceMetadata
     {
-        public PdfMetadata(Uri uri, IEnumerable<string> metaNames) : base(uri, metaNames) { }
+        public PdfMetadata(Resource resource, IEnumerable<string> metaNames) : base(resource, metaNames) { }
 
-        public override async Task<MetadataResponse> Get()
+        public override async Task<MetadataResponse> Get(HttpContent content)
         {
-
             try
             {
                 IDictionary<string, string> metadata = new Dictionary<string, string>();
 
-                using (HttpClient client = new HttpClient())
-                using (HttpResponseMessage response = await client.GetAsync(uri))
-                using (HttpContent content = response.Content)
+                Stream resultStream = await content.ReadAsStreamAsync();
+
+                if (resultStream != null)
                 {
-                    if (response.StatusCode != HttpStatusCode.OK)
+                    PdfDocument doc = new PdfDocument(new PdfReader(resultStream));
+                    PdfDocumentInfo info = doc.GetDocumentInfo();
+                    foreach (string name in metaNames)
                     {
-                        return new MetadataResponse() { Url = uri.AbsoluteUri, StatusCode = response.StatusCode, Metadata = null, ErrorMessage = response.ReasonPhrase };
-                    }
-
-                    Stream resultStream = await content.ReadAsStreamAsync();
-
-                    if (resultStream != null)
-                    {
-                        PdfDocument doc = new PdfDocument(new PdfReader(resultStream));
-                        PdfDocumentInfo info = doc.GetDocumentInfo();
-                        foreach (string name in metaNames)
+                        string value = info.GetMoreInfo(name);
+                        if (!String.IsNullOrEmpty(value))
                         {
-                            string value = info.GetMoreInfo(name);
-                            if (!String.IsNullOrEmpty(value))
-                            {
-                                metadata[name] = value;
-                            }
+                            metadata[name] = value;
                         }
                     }
                 }
 
-                return new MetadataResponse() { Url = uri.AbsoluteUri, StatusCode = HttpStatusCode.OK, Metadata = metadata, ErrorMessage = null };
-
+                return new MetadataResponse() { Url = resource.Url, StatusCode = HttpStatusCode.OK, Metadata = metadata, ErrorMessage = null };
 
 
             }
             catch (Exception e)
             {
-                return new MetadataResponse() { Url = uri.AbsoluteUri, StatusCode = HttpStatusCode.BadRequest, Metadata = null, ErrorMessage = e.Message };
+                return new MetadataResponse() { Url = resource.Url, StatusCode = HttpStatusCode.BadRequest, Metadata = null, ErrorMessage = e.Message };
             }
         }
     }

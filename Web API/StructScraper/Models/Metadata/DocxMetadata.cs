@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Net;
 using System.IO;
+using System.Net.Http;
 
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.CustomProperties;
@@ -14,19 +15,17 @@ namespace StructScraper.Models.Metadata
 {
     public class DocxMetadata : ResourceMetadata
     {
-        public DocxMetadata(Uri uri, IEnumerable<string> metaNames) : base(uri, metaNames) { }
+        public DocxMetadata(Resource resource, IEnumerable<string> metaNames) : base(resource, metaNames) { }
 
-        public override async Task<MetadataResponse> Get()
+        public override async Task<MetadataResponse> Get(HttpContent content)
         {
             try
             {
                 IDictionary<string, string> metadata = new Dictionary<string, string>();
 
-                using (WebClient client = new WebClient())
-                using (Stream stream = client.OpenRead(uri))
                 using (var memStream = new MemoryStream())
                 {
-                    stream.CopyTo(memStream);
+                    await content.CopyToAsync(memStream);
 
                     using (var document = WordprocessingDocument.Open(memStream, false))
                     {
@@ -47,13 +46,16 @@ namespace StructScraper.Models.Metadata
 
                         if (packageProps != null)
                         {
-                            if (metaNames.Contains("Category", StringComparer.OrdinalIgnoreCase)) {
+                            if (metaNames.Contains("Category", StringComparer.OrdinalIgnoreCase))
+                            {
                                 metadata["Category"] = packageProps.Category;
                             }
-                            if (metaNames.Contains("ContentStatus", StringComparer.OrdinalIgnoreCase)) {
+                            if (metaNames.Contains("ContentStatus", StringComparer.OrdinalIgnoreCase))
+                            {
                                 metadata["ContentStatus"] = packageProps.ContentStatus;
                             }
-                            if (metaNames.Contains("ContentType", StringComparer.OrdinalIgnoreCase)) {
+                            if (metaNames.Contains("ContentType", StringComparer.OrdinalIgnoreCase))
+                            {
                                 metadata["ContentType"] = packageProps.ContentType;
                             }
                             if (metaNames.Contains("Created", StringComparer.OrdinalIgnoreCase))
@@ -122,13 +124,13 @@ namespace StructScraper.Models.Metadata
                     }
                 }
 
-                return new MetadataResponse() { Url = uri.AbsoluteUri, StatusCode = HttpStatusCode.OK, Metadata = metadata, ErrorMessage = null };
+                return new MetadataResponse() { Url = resource.Url, StatusCode = HttpStatusCode.OK, Metadata = metadata, ErrorMessage = null };
             }
             catch (Exception e)
             {
-                return new MetadataResponse() { Url = uri.AbsoluteUri, StatusCode = HttpStatusCode.BadRequest, Metadata = null, ErrorMessage = e.Message };
+                return new MetadataResponse() { Url = resource.Url, StatusCode = HttpStatusCode.BadRequest, Metadata = null, ErrorMessage = e.Message };
             }
-
         }
+
     }
 }
